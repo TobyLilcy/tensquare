@@ -31,4 +31,6 @@ public class ProblemController {
         Problem problem = problemService.findById(id);
         return new Result(true, StatusCode.OK, "查询成功", problem);
     }
+
+
 }
