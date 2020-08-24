@@ -44,12 +44,15 @@ public class ArticleService {
     }
 
     public Article findById(String id){
+        //1: 先从redis缓存中获取
         Article article = (Article) redisTemplate.opsForValue().get("article_" + id);
         if(article == null){
+            //2: 如果redis没有, 就查询数据库
             article = articleDao.findById(id).get();
+            //2.1: 将数据库查询的数据放到redis中
             redisTemplate.opsForValue().set("article_" + id, article);
         }
-        return articleDao.findById(id).get();
+        return article;
     }
 
     public void save(Article article){
@@ -58,10 +61,14 @@ public class ArticleService {
     }
 
     public void update(Article article){
+        //修改的时候要删除redis缓存, 以便刷新redis
+        redisTemplate.delete("article_" + article.getId());
         articleDao.save(article);
     }
 
     public void deleteById(String id){
+        //修改的时候要删除redis缓存, 以便刷新redis
+        redisTemplate.delete("article_" + id);
         articleDao.deleteById(id);
     }
 

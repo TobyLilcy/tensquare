@@ -12,5 +12,5 @@ spring:
     database: mysql
     show-sql: true
   redis:
-    47.105.40.89
+    host: 47.105.40.89
 
