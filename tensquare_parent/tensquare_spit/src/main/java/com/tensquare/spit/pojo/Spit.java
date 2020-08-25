@@ -1,8 +1,8 @@
 package com.tensquare.spit.pojo;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
