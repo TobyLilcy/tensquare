@@ -12,3 +12,5 @@ spring:
     host: 47.105.40.89
   rabbitmq:
     host: 47.105.40.89
+
+
